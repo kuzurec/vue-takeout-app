@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    <seller-header :seller="seller" v-if="seller"></seller-header>
     <foodlist :goods="goods" v-if="goods.length">
+      <seller-header :seller="seller" v-if="seller"></seller-header>
     </foodlist>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import foodlist from '@/components/foodlist.vue'
-import sellerHeader from '@/components/header.vue'
+import foodlist from '@/components/foodlist/foodlist.vue'
+import sellerHeader from '@/components/header/header.vue'
 import {
   getGoods,
   getSeller

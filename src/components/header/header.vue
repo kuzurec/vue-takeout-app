@@ -17,8 +17,9 @@ export default {
 <style lang='stylus' scoped>
   .header-wrapper
     height 56px
-    background rgba(0,0,0,0.5)
     display flex
+    background #444
+    color #fff
     img
       width 40px
       height 40px
@@ -30,5 +31,4 @@ export default {
       height 56px
       line-height 56px
       margin-left 20px
-      color #fff
 </style>
