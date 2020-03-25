@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <foodlist :goods="goods" v-if="goods.length">
-      <seller-header :seller="seller" v-if="seller"></seller-header>
+      <Header></Header>
     </foodlist>
   </div>
 </template>
@@ -9,39 +9,31 @@
 <script>
 // @ is an alias to /src
 import foodlist from '@/components/foodlist/foodlist.vue'
-import sellerHeader from '@/components/header/header.vue'
+import Header from '@/components/header/header.vue'
 import {
-  getGoods,
-  getSeller
+  getGoods
 } from '@/api'
 
 export default {
   name: 'Home',
   data () {
     return {
-      goods: [],
-      seller: {}
+      goods: []
     }
   },
   created () {
     this.getGoodsInfo()
-    this.getSellersInfo()
   },
   methods: {
     getGoodsInfo () {
       getGoods().then((res) => {
         this.goods = res
       })
-    },
-    getSellersInfo () {
-      getSeller().then((res) => {
-        this.seller = res
-      })
     }
   },
   components: {
     foodlist: foodlist,
-    sellerHeader: sellerHeader
+    Header: Header
   }
 }
 </script>

@@ -15,7 +15,8 @@
         v-for='item in goods'
         :key='item.name'
         :label='item.name'
-        :title='item.name'>
+        :title='item.name'
+        >
         <ul>
           <li v-for='food in item.foods' :key='food.name'>
             <div class="food-item">
@@ -116,10 +117,10 @@ export default {
   font-weight 500
 /deep/.cube-sticky
   background #fff
-
+/deep/.cube-scroll-nav-main
+  margin-bottom 60px
 /deep/.cube-sticky-content
   opacity 0.8
-
 .food-item
   height 100px
   display flex

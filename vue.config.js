@@ -27,12 +27,13 @@ module.exports = {
           data: goods
         })
       })
-      app.get('/api/seller', function(req,res) {
+      app.get('/api/seller', function(req, res) {
         res.json({
           errno: 0,
           data: seller
         })
       })
-    }
+    },
+    disableHostCheck: true
   }
 }

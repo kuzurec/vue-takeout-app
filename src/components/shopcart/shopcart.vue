@@ -7,7 +7,6 @@
           <div class="countIcon" v-show="totalCount>0">{{totalCount}}</div>
         </div>
         <p class="totalprice" v-show="totalCount>0">{{'￥'+totalPrice}}</p>
-        <p class="tip" v-show="totalCount===0">购物车还是空的~</p>
       </div>
       <div class="pay" :class="{'invalid': totalCount===0}" @click.stop="handleClickPay">点好了</div>
     </div>
@@ -81,7 +80,7 @@ export default {
       if (this.totalCount === 0) {
         return
       }
-      this.$router.push({ path: '/order' })
+      this.$router.push({ name: 'Order', params: { selectedList: this.selectedFoods } })
     }
   },
   components: {
@@ -96,11 +95,14 @@ export default {
 .shopcart
   position fixed
   height 60px
-  width 100%
-  background #444
+  width 90%
+  background #000
   bottom 0
   z-index 99
   display flex
+  border-radius 50px
+  margin 5px 5%
+  box-shadow 0.5px 0.5px 10px gray
   .leftcart
     flex 1
     display flex
@@ -110,17 +112,11 @@ export default {
       left 40px
       line-height 60px
       font-size 24px
-    .tip
-      color #aaa
-      line-height 60px
-      position relative
-      left 40px
-      font-size 14px
     .iconwrapper
       width 55px
       height 55px
       border-radius 50%
-      background $themeColor
+      background-image: linear-gradient(to bottom right, orange , $themeColor)
       position relative
       left 23px
       bottom 12px
@@ -145,16 +141,18 @@ export default {
       background #aaa
   .pay
     flex  0 0 108px
-    background $themeColor
+    background-image: linear-gradient(to bottom right, orange , $themeColor)
     height 60px
     color #fff
     line-height 60px
     text-align center
+    border-radius 0 50px 50px 0
+    margin-right -2px
   .invalid
     background #777
 .cartlist-wrapper
   position fixed
-  bottom 60px
+  bottom 0px
   left 0
   width 100%
   border-radius 5px
@@ -168,6 +166,7 @@ export default {
   .scroll-list-wrap
     margin 0 20px
     max-height 450px
+    margin-bottom 60px
     /deep/.cube-scroll-wrapper
       max-height 450px
       .fooditem
@@ -214,7 +213,7 @@ export default {
   width 100%
   height 100%
   background rgba(7, 17, 27, 0.6)
-  backdrop-filter: blur(10px)
+  backdrop-filter: blur(1px)
   z-index 1
   &.fade-enter, &.fade-leave-to
     opacity 0

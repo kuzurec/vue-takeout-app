@@ -1,34 +1,35 @@
 <template>
   <div class="header-wrapper">
-    <img :src="seller.avatar" />
-    <p>{{seller.name}}</p>
+    <div class="order-butt" @click="handleButtClick">我的订单 >></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'sellerHeader',
-  props: {
-    seller: Object
+  name: 'Header',
+  methods: {
+    handleButtClick () {
+      this.$router.push({ name: 'OrderList' })
+    }
   }
 }
 </script>
 
 <style lang='stylus' scoped>
+@import '../../assets/styles/varible.styl'
   .header-wrapper
-    height 56px
+    height 36px
     display flex
-    background #444
     color #fff
-    img
-      width 40px
-      height 40px
-      border 1px solid #fff
-      position: relative
-      top: 6px
-      left: 10px
-    p
-      height 56px
-      line-height 56px
-      margin-left 20px
+    position relative
+    align-items center
+    background-image: linear-gradient(to bottom right, orange , $themeColor)
+    .order-butt
+      position absolute
+      right 10px
+      background #fff
+      border-radius 10px
+      padding 4px 9px
+      color orange
+      font-size 12px
 </style>
