@@ -14,13 +14,7 @@ export default {
   name: 'Order',
   data () {
     return {
-      orderlist: this.$route.params.selectedList
-    }
-  },
-  created () {
-    console.log(this.orderlist)
-    if (this.orderlist === undefined) {
-      this.$router.push({ path: '/' })
+      orderlist: localStorage.getItem('selectedGoods') ? JSON.parse(localStorage.getItem('selectedGoods')) : []
     }
   },
   computed: {

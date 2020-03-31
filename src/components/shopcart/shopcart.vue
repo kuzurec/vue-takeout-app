@@ -80,7 +80,8 @@ export default {
       if (this.totalCount === 0) {
         return
       }
-      this.$router.push({ name: 'Order', params: { selectedList: this.selectedFoods } })
+      localStorage.setItem('selectedGoods', JSON.stringify(this.selectedFoods))
+      this.$router.push({ name: 'Order' })
     }
   },
   components: {

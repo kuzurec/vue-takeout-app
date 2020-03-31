@@ -1,6 +1,8 @@
-const data = require('./data.json')
+const data = require('./data2.json')
 const goods = data.goods
-const seller = data.seller
+const create = data.create
+const detail = data.detail
+const cancel = data.cancel
 
 module.exports = {
   css: {
@@ -21,17 +23,17 @@ module.exports = {
   },
   devServer: {
     before(app) {
-      app.get('/api/goods', function(req, res) {
-        res.json({
-          errno: 0,
-          data: goods
-        })
+      app.get('/sell/buyer/product/list', function(req, res) {
+        res.json(goods)
       })
-      app.get('/api/seller', function(req, res) {
-        res.json({
-          errno: 0,
-          data: seller
-        })
+      app.post('/sell/buyer/order/create', function(req, res) {
+        res.json(create)
+      })
+      app.get('/sell/buyer/order/detail', function(req, res) {
+        res.json(detail)
+      })
+      app.get('/sell/buyer/order/cancel', function(req,res) {
+        res.json(cancel)
       })
     },
     disableHostCheck: true

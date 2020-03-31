@@ -3,7 +3,7 @@
     <ul class="orderlist">
       <li v-for="food in showlist" :key="food.name">
         <div class="food-item">
-          <img :src="food.icon" alt="">
+          <img :src="food.productIcon" alt="">
           <div class="food-center">
             <p class="food-name">{{food.name}}</p>
             <div class="food-count">{{'x'+food.count}}</div>

@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { postOrder } from '@/api'
 export default {
   name: 'orderBottom',
   props: {
@@ -21,7 +22,16 @@ export default {
   },
   methods: {
     handleConfirmClick () {
-      this.$router.push({ name: 'OrderDetail', params: { orderlist: this.orderlist } })
+      const foods = this.orderlist.map((item) => (
+        { productId: item.id, productQuantity: item.count }
+      ))
+      postOrder({
+        tablenumber: 2,
+        openid: 'dsf8er93rudufh',
+        items: JSON.stringify(foods)
+      }).then((res) => {
+        this.$router.push({ name: 'OrderDetail', params: { orderId: res.orderId } })
+      })
     }
   }
 }

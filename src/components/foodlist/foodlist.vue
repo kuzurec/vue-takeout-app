@@ -18,7 +18,7 @@
         :title='item.name'
         >
         <ul>
-          <li v-for='food in item.foods' :key='food.name'>
+          <li v-for='food in item.foods' :key='food.id'>
             <div class="food-item">
               <img :src="food.icon">
               <div>
