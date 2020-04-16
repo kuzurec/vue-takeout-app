@@ -1,8 +1,8 @@
 <template>
-  <div class="order">
-    <order-header></order-header>
-    <order-list :orderlist="orderlist" v-if="orderlist"></order-list>
-    <order-bottom :totalPrice="totalPrice" :orderlist="orderlist"></order-bottom>
+  <div class="order" v-if="orderlist.length>0">
+    <order-header @changeTableNumber="changeTableNumber"></order-header>
+    <order-list :orderlist="orderlist"></order-list>
+    <order-bottom :totalPrice="totalPrice" :orderlist="orderlist" :tableNumber="tableNumber"></order-bottom>
   </div>
 </template>
 
@@ -14,7 +14,13 @@ export default {
   name: 'Order',
   data () {
     return {
-      orderlist: localStorage.getItem('selectedGoods') ? JSON.parse(localStorage.getItem('selectedGoods')) : []
+      orderlist: localStorage.getItem('selectedGoods') ? JSON.parse(localStorage.getItem('selectedGoods')) : [],
+      tableNumber: 1
+    }
+  },
+  methods: {
+    changeTableNumber (value) {
+      this.tableNumber = value
     }
   },
   computed: {

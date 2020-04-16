@@ -5,7 +5,8 @@
         <p><span class="iconfont tableicon">&#xe613;</span>座位</p>
         <cube-select
           v-model="value"
-          :options="options">
+          :options="options"
+          @change="change">
         </cube-select>
       </div>
     </div>
@@ -17,8 +18,13 @@ export default {
   name: 'orderHeader',
   data () {
     return {
-      options: ['1号桌', '2号桌', '3号桌', 2016, 2017, 2018],
-      value: '2号桌'
+      options: ['1号桌', '2号桌', '3号桌', '4号桌', '5号桌', '6号桌'],
+      value: '1号桌'
+    }
+  },
+  methods: {
+    change (value, index, text) {
+      this.$emit('changeTableNumber', parseInt(value))
     }
   }
 }

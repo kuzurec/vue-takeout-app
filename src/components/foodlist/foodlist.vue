@@ -49,14 +49,6 @@ export default {
       current: this.goods[0].name
     }
   },
-  methods: {
-    changeHandler (label) {
-      console.log('changed to:', label)
-    },
-    stickyChangeHandler (current) {
-      console.log('sticky-change', current)
-    }
-  },
   computed: {
     selectedFoods () {
       const foods = []

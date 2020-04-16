@@ -13,12 +13,14 @@
 </template>
 
 <script>
-import { postOrder } from '@/api'
+import { postOrder, getCookie } from '@/api'
+import { sellUrl } from '@/constants'
 export default {
   name: 'orderBottom',
   props: {
     totalPrice: Number,
-    orderlist: Array
+    orderlist: Array,
+    tableNumber: Number
   },
   methods: {
     handleConfirmClick () {
@@ -26,11 +28,12 @@ export default {
         { productId: item.id, productQuantity: item.count }
       ))
       postOrder({
-        tablenumber: 2,
-        openid: 'dsf8er93rudufh',
+        tablenumber: this.tableNumber,
+        openid: getCookie('openid'),
         items: JSON.stringify(foods)
       }).then((res) => {
-        this.$router.push({ name: 'OrderDetail', params: { orderId: res.orderId } })
+        // this.$router.push({ name: 'OrderDetail', params: { orderId: res.orderId } })
+        location.href = sellUrl + '/order/' + res.orderId
       })
     }
   }

@@ -1,3 +1,3 @@
-export const sellUrl = 'http://127.0.0.1'
-export const openidUrl = 'http://sell.springboot.cn/sell/wechat/authorize'
-export const wechatPayUrl = 'http://127.0.0.1'
+export const sellUrl = 'https://order.natappvip.cc'
+export const openidUrl = 'https://order.natappvip.cc/sell/wechat/authorize'
+export const wechatPayUrl = 'http://proxy.springboot.cn/pay'

@@ -1,5 +1,5 @@
 <template>
-  <div class="order-detail">
+  <div class="order-detail" v-if="Object.keys(order).length>0">
     <div class="detail-header">
       <p class="tip">{{order.orderStatus | orderStatusName(order.payStatus)}}</p>
       <p class="cancelBtn" v-show="!order.orderStatus" @click="handleCancelBtn(order.orderId)">{{cancelText}}</p>
@@ -8,7 +8,7 @@
           <span class="iconfont tableicon">&#xe613;</span>
           座位
         </p>
-        <p class="right-value">{{order.buyerTablenumber+"号桌"}}</p>
+        <p class="right-value" v-if="tableNumber!=undefined">{{tableNumber+"号桌"}}</p>
       </div>
     </div>
     <order-list :orderlist="foodlist" v-if="foodlist"></order-list>
@@ -29,7 +29,7 @@
         <p class="right-value">{{order.createTime | time}}</p>
       </div>
     </div>
-    <div class="pay-order" v-show="!order.orderStatus">
+    <div class="pay-order" v-show="!order.payStatus" @click="handlePayBtnClick((order.orderId))">
       微信支付
     </div>
   </div>
@@ -37,12 +37,14 @@
 
 <script>
 import orderList from '../components/order-list/order-list.vue'
-import { getDetail, postCancel } from '@/api'
+import { getDetail, postCancel, getCookie } from '@/api'
+import { wechatPayUrl, sellUrl } from '@/constants'
 export default {
   name: 'OrderDetail',
   data () {
     return {
       order: {},
+      tableNumber: 1,
       orderDetailList: [],
       foodlist: [],
       cancelText: '取消订单'
@@ -50,10 +52,11 @@ export default {
   },
   created () {
     getDetail({
-      openid: 'dsafdsgegrgsd',
+      openid: getCookie('openid'),
       orderId: this.$route.params.orderId
     }).then((res) => {
       this.order = res
+      this.tableNumber = this.order.tableNumber
       this.orderDetailList = res.orderDetailList
       this.foodlist = this.orderDetailList.map((item) => {
         return {
@@ -69,11 +72,18 @@ export default {
     handleCancelBtn (orderId) {
       this.cancelText = '取消中...'
       postCancel({
-        openid: 'dsfkjsdkfjfdd',
+        openid: getCookie('openid'),
         orderId: orderId
       }).then((res) => {
         location.reload()
       })
+    },
+    handlePayBtnClick (orderId) {
+      location.href = wechatPayUrl +
+      '?openid=' + 'oTgZpwSy_sQjDABm488bVw6AMnDY' +
+      '&orderId=' + orderId +
+      '&returnUrl=' + sellUrl + '/order/' + orderId
+      localStorage.setItem('selectedGoods', '[]')
     }
   },
   filters: {

@@ -10,13 +10,13 @@
 // @ is an alias to /src
 import foodlist from '@/components/foodlist/foodlist.vue'
 import Header from '@/components/header/header.vue'
-// import {
-//   openidUrl,
-//   sellUrl
-// } from '@/constants'
 import {
-  getGoods
-  // getCookie
+  openidUrl,
+  sellUrl
+} from '@/constants'
+import {
+  getGoods,
+  getCookie
 } from '@/api'
 
 export default {
@@ -27,15 +27,15 @@ export default {
     }
   },
   created () {
-    // var openid = this.$route.query.openid
-    // if (typeof openid !== 'undefined') {
-    //   var exp = new Date()
-    //   exp.setTime(exp.getTime() + 3600 * 1000)// 过期时间60分钟
-    //   document.cookie = 'openid=' + openid + ';expires=' + exp.toGMTString()
-    // }
-    // if (getCookie('openid') == null) {
-    //   location.href = openidUrl + '?returnUrl=' + encodeURIComponent(sellUrl + '/#/')
-    // }
+    var openid = this.$route.query.openid
+    if (typeof openid !== 'undefined') {
+      var exp = new Date()
+      exp.setTime(exp.getTime() + 3600 * 1000)// 过期时间60分钟
+      document.cookie = 'openid=' + openid + ';expires=' + exp.toGMTString()
+    }
+    if (getCookie('openid') == null) {
+      location.href = openidUrl + '?returnUrl=' + encodeURIComponent(sellUrl)
+    }
     this.getGoodsInfo()
   },
   methods: {

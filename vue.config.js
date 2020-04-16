@@ -3,6 +3,7 @@ const goods = data.goods
 const create = data.create
 const detail = data.detail
 const cancel = data.cancel
+const list = data.list
 
 module.exports = {
   css: {
@@ -32,8 +33,11 @@ module.exports = {
       app.get('/sell/buyer/order/detail', function(req, res) {
         res.json(detail)
       })
-      app.get('/sell/buyer/order/cancel', function(req,res) {
+      app.post('/sell/buyer/order/cancel', function(req, res) {
         res.json(cancel)
+      })
+      app.get('/sell/buyer/order/list', function(req, res) {
+        res.json(list)
       })
     },
     disableHostCheck: true
